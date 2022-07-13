@@ -1,0 +1,28 @@
+<div class="reviews__card">
+    <div class="reviews__avatar">
+        <img
+            src="/img/users/<%= review.user.photo %>"
+            alt="<%= review.user.name %>"
+            class="reviews__avatar-img"
+        />
+        <h6 class="reviews__user"><%= review.user.name %></h6>
+    </div>
+    <p class="reviews__text"><%= review.review %></p>
+    <div class="reviews__rating">
+        <!-- showing rating reviews  -->
+        <% const x = review.rating %>
+        <!-- loop for 5 stars  -->
+        <% for(let i=1;i<= 5;i++){ %>
+
+        <!-- for no. of filled stars  -->
+        <% if(i <= x ){ %>
+        <svg class="reviews__star reviews__star--active">
+            <use xlink:href="/img/icons.svg#icon-star"></use>
+        </svg>
+        <% }else{ %>
+        <svg class="reviews__star reviews__star--inactive">
+            <use xlink:href="/img/icons.svg#icon-star"></use>
+        </svg>
+        <% }} %>
+    </div>
+</div>
