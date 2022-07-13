@@ -2,6 +2,13 @@
 
 ### [Click to see Live Demo](https://github.com/rajatverma311201/Adventour)
 
+<hr />
+
+### Contributors
+> 1. [Rajat Verma](https://github.com/rajatverma311201)
+> 2. [Sahil Singh Rathore](https://github.com/rajatverma311201) 
+<hr />
+
 ### A ficitional Tour booking website made with
 
 > -   NodeJS and ExpressJS
