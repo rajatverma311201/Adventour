@@ -6,7 +6,7 @@
 
 ### Contributors
 > 1. [Rajat Verma](https://github.com/rajatverma311201)
-> 2. [Sahil Rathore](https://github.com/rajatverma311201) 
+> 2. [Sahil Rathore](https://github.com/rathoreSahil) 
 <hr />
 
 ### A ficitional Tour booking website made with
