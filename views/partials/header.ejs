@@ -4,7 +4,7 @@
         <form class="nav__search">
             <button class="nav__search-btn">
                 <svg>
-                    <use xlink:href="/img/icons.svg#icon-search"></use>
+                    <use xlink:href="img/icons.svg#icon-search"></use>
                 </svg>
             </button>
             <input
@@ -18,17 +18,21 @@
         <img src="/img/logo-white.png" alt="Natours logo" />
     </div>
     <nav class="nav nav--user">
-        <!-- <a href="#" class="nav__el">My bookings</a>
-        <a href="#" class="nav__el">
-            <img
-                src="/img/user.jpg"
-                alt="User photo"
-                class="nav__user-img"
-            />
-            <span>Jonas</span>
-        </a> -->
+        <a href="#" class="nav__el">My bookings</a>
 
-        <button class="nav__el">Log in</button>
-        <button class="nav__el nav__el--cta">Sign up</button>
+        <%if(locals.user){%>
+        <a class="nav__el nav__el--logout" href="#">Log out</a>
+        <a class="nav__el" href="#"
+            ><img
+                class="nav__user-img"
+                src="/img/users/<%=locals.user.photo%>"
+                alt="<%=locals.user.name%>"
+            />
+            <span><%=user.name.split(' ')[0]%></span>
+        </a>
+        <%} else{%>
+        <a class="nav__el" href="/login">Log in</a>
+        <a class="nav__el nav__el--cta" href="#">Sign up</a>
+        <%}%>
     </nav>
 </header>
