@@ -3,14 +3,14 @@ document.querySelector('#logoutUser').addEventListener('click', () => {
     logout();
 });
 
-const showAlert = (type, msg) => {
-    hideAlert();
+const showAlertLogout = (type, msg) => {
+    hideAlertLogout();
     const markup = `<div class="alert alert--${type}">${msg}</div>`;
     document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
-    window.setTimeout(hideAlert, 1000);
+    window.setTimeout(hideAlertLogout, 1000);
 };
 
-const hideAlert = () => {
+const hideAlertLogout = () => {
     const el = document.querySelector('.alert');
     if (el) el.parentElement.removeChild(el);
 };
@@ -23,13 +23,13 @@ const logout = async () => {
         });
         // console.log(axiosResponse.data);
         if (axiosResponse.data.status === 'success') {
-            showAlert('success', 'Logged Out');
+            showAlertLogout('success', 'Logged Out');
             window.setTimeout(() => {
                 location.assign('/');
             }, 500);
         }
     } catch (err) {
         console.log(err);
-        showAlert('error', err.response.data.message);
+        showAlertLogout('error', err.response.data.message);
     }
 };
