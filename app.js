@@ -30,11 +30,16 @@ const limiter = rateLimit({
     message: 'Too many requests from this IP, please try again in an hour!',
 });
 app.use('/api', limiter);
+app.use((req, res, next) => {
+    res.locals.user = undefined;
+    next();
+});
 
 // Body parser, reading data from body into req.body
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
+// app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
 
 // cookie parser

@@ -48,12 +48,13 @@ body {
 }
 
 .main {
-    background-color: #f7f7f7;
+    background-color: var(--color-dark);
     padding: 8rem 6rem;
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
     position: relative;
+    /* box-shadow: 5px 5px 10px 25px black; */
 }
 
 .flex {
@@ -235,16 +236,18 @@ body {
 }
 
 .btn--green {
-    background-color: #55c57a;
+    font-weight: 700;
+    background-color: #0fab7a;
     color: #fff;
 }
 .btn--green::after {
-    background-color: #55c57a;
+    background-color: #0fab7a;
 }
 
 .btn--small {
     padding: 1.25rem 3rem !important;
     font-size: 1.4rem !important;
+    font-weight: bold !important;
 }
 
 .btn-small,
@@ -281,7 +284,7 @@ body {
 }
 
 .btn-text:hover {
-    background-color: #55c57a;
+    background-color: #0fab7a;
     color: #fff;
     -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
@@ -767,14 +770,14 @@ body {
 }
 
 .user-view {
-    background-color: #fff;
+    background-color: var(--color-dark);
     max-width: 120rem;
     margin: 0 auto;
     min-height: 100vh;
     border-radius: 3px;
     overflow: hidden;
-    -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.07);
-    box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.07);
+    -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.4);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -787,10 +790,10 @@ body {
         linear,
         left top,
         right bottom,
-        from(#7dd56f),
+        from(#0fab7a),
         to(#28b487)
     );
-    background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
+    background-image: linear-gradient(to right bottom, #0fab53, #28b487);
     padding: 4rem 0;
 }
 .user-view__content {
@@ -1051,10 +1054,10 @@ body {
     color: #fff;
     font-size: 1.5rem;
     text-transform: uppercase;
-    font-weight: 400;
     text-decoration: none;
     -webkit-transition: all 0.3s;
     transition: all 0.3s;
+    font-weight: 500;
 }
 .side-nav a:hover,
 .side-nav a:active {
@@ -1286,6 +1289,7 @@ body {
     font-size: 1.6rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
+    color: #dbdbdb;
 }
 
 .form__photo-upload {
@@ -1344,4 +1348,15 @@ body {
     text-decoration: none;
     color: #fff;
     font-weight: bold;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+    color: white;
+    background-color: var(--color-dark-secondary);
+}
+
+.nav__search input[type='text'] {
+    background-color: #444;
 }

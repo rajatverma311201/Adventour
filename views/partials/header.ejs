@@ -20,16 +20,23 @@
     <nav class="nav nav--user">
         <a href="#" class="nav__el">My bookings</a>
 
-        <%if(locals.user){%>
-        <a class="nav__el nav__el--logout" href="#">Log out</a>
-        <a class="nav__el" href="#"
+        <%if(user){%>
+        <button class="nav__el nav__el--logout" id="logoutUser">Log out</button>
+        <a class="nav__el" href="/me"
             ><img
                 class="nav__user-img"
-                src="/img/users/<%=locals.user.photo%>"
-                alt="<%=locals.user.name%>"
+                src="/img/users/<%=user.photo%>"
+                alt="<%=user.name%>"
             />
             <span><%=user.name.split(' ')[0]%></span>
         </a>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+            integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script src="/js/logout.js"></script>
         <%} else{%>
         <a class="nav__el" href="/login">Log in</a>
         <a class="nav__el nav__el--cta" href="#">Sign up</a>
