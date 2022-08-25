@@ -5,8 +5,10 @@
 <hr />
 
 ### Contributors
+
 > 1. [Rajat Verma](https://github.com/rajatverma311201)
-> 2. [Sahil Rathore](https://github.com/rathoreSahil) 
+> 2. [Sahil Rathore](https://github.com/rathoreSahil)
+
 <hr />
 
 ### A ficitional Tour booking website made with
@@ -26,7 +28,7 @@
 
 ### Some important modules used for Security purpose
 
-```
+```javascript
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
