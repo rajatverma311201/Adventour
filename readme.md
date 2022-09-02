@@ -23,7 +23,9 @@
 > -   Built the REST (REpresentational State Transfer) API with Node, Express and Mongoose
 > -   The WebApp also implements MVC (Model-View-Controller) architecture
 > -   Functionality of User Signup, login, reset account password is implemented
-> -   User can make payment and book tour, see all tours, give reviews on a tour.
+
+<!-- > -   User can make payment and book tour, see all tours, give reviews on a tour. -->
+
 > -   Admin can delete, create and get all users, delete, create and get all tours, update and delete reviews
 
 ### Some important modules used for Security purpose
