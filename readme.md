@@ -1,6 +1,6 @@
 # Adventour website
 
-### [Click to see Live Demo](https://github.com/rajatverma311201/Adventour)
+### [Click to see Live Demo](https://adven-tour.herokuapp.com/)
 
 <hr />
 
