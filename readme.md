@@ -1,6 +1,6 @@
 # Adventour website
 
-### [Click to see Live Demo](https://github.com/rajatverma311201/Adventour)
+### [Click to see Live Demo](https://adven-tour.herokuapp.com/)
 
 <hr />
 
@@ -22,7 +22,8 @@
 > -   It is a Server Side Rendered Website having EJS as the view engine
 > -   Built the REST (REpresentational State Transfer) API with Node, Express and Mongoose
 > -   The WebApp also implements MVC (Model-View-Controller) architecture
-> -   Functionality of User Signup, login, reset account password is implemented
+> -   Functionality of User Signup, login, reset account password using email is implemented
+
 
 <!-- > -   User can make payment and book tour, see all tours, give reviews on a tour. -->
 
