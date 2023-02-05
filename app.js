@@ -33,7 +33,6 @@ app.use((req, res, next) => {
     next();
 });
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
@@ -77,8 +76,5 @@ app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/', viewRouter);
-
-
-
 
 module.exports = app;

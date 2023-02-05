@@ -177,7 +177,8 @@
                 <!-- for loop -->
                 <% reviews.forEach( review =>{ %>
                 <!-- including reviews  -->
-                <%- include("./partials/reviews", {review}) %>
+                <% if(review.user!=null) {%> <%-include("./partials/reviews",
+                {review}) %> <%}%>
                 <!-- reviews end  -->
                 <% }) %>
             </div>
