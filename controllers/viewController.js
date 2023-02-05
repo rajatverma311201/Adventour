@@ -18,8 +18,11 @@ module.exports = {
                 fields: 'review rating user',
             }
         );
+        
+        console.log(currTour);
 
         res.render('tour.ejs', { tour: currTour });
+        // res.status(200).send(currTour);
     },
     getLoginForm: (req, res) => {
         res.status(200).render('login.ejs');
