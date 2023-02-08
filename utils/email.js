@@ -1,44 +1,46 @@
 const nodemailer = require('nodemailer');
 const ejs = require('ejs');
 const { htmlToText } = require('html-to-text');
-const nodemailerSendgrid = require('nodemailer-sendgrid');
 
 module.exports = class Email {
     constructor(user, url) {
         this.to = user.email;
         this.firstName = user.name.split(' ')[0];
         this.url = url;
-        this.from = `Rajat Verma <${process.env.EMAIL_FROM}>`;
+        this.from = `Rajat Verma <${process.env.GMAIL_NODEMAILER_USER}>`;
     }
 
     newTransport() {
-        // if (process.env.NODE_ENV === 'production') {
-        // ***************
-        // SENDGRID
-        // ****************
-        console.log('email sent');
-        return nodemailer.createTransport(
-            // service: 'SendGrid',
-            // auth: {
-            //     user: process.env.SENDGRID_USERNAME,
-            //     pass: process.env.SENDGRID_PASSWORD,
-            // },
+        if (process.env.NODE_ENV === 'production') {
+            // ***************
+            // SENDGRID
+            // ****************
+            return nodemailer.createTransport(
+                // service: 'SendGrid',
+                // auth: {
+                //     user: process.env.SENDGRID_USERNAME,
+                //     pass: process.env.SENDGRID_PASSWORD,
+                // },
 
-            nodemailerSendgrid({
-                apiKey: process.env.SENDGRID_API_KEY,
-            })
+                // {
+                //     host: "smtp.sendgrid.net",
+                //     port: 587,
+                //     auth: {
+                //         user: 'apikey',
+                //         pass: process.env.SENDGRID_PASSWORD,
+                //     },
+                // }
 
-            // {
-            //     host: "smtp.sendgrid.net",
-            //     port: 587,
-            //     auth: {
-            //         user: 'apikey',
-            //         pass: process.env.SENDGRID_PASSWORD,
-            //     },
-            // }
-        );
-        // }
-        console.log('hello');
+                // USING GMAIL SERVICE
+                {
+                    service: 'gmail',
+                    auth: {
+                        user: process.env.GMAIL_NODEMAILER_USER,
+                        pass: process.env.GMAIL_NODEMAILER_PASS,
+                    },
+                }
+            );
+        }
         return nodemailer.createTransport({
             // *************
             // MAILTRAP
