@@ -15,10 +15,13 @@
         <title>Adventour | <%= tour.name %></title>
 
         <script src="https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
+        <script src="https://js.stripe.com/v3/" async></script>
+
         <link
             href="https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css"
             rel="stylesheet"
         />
+        <script src="/js/index.js" type="module"></script>
     </head>
     <body>
         <%- include("./partials/header") %>
@@ -210,9 +213,20 @@
                         10 days. 1 adventure. Infinite memories. Make it yours
                         today!
                     </p>
-                    <button class="btn btn--green span-all-rows">
+                    <% if(user){ %>
+                    <button
+                        class="btn btn--green span-all-rows"
+                        id="book-tour"
+                        data-tour-id="<%= tour._id %>"
+                    >
                         Book tour now!
                     </button>
+                    <% }else{ %>
+
+                    <a href="/login" class="btn btn--green span-all-rows">
+                        Login to book tour
+                    </a>
+                    <% } %>
                 </div>
             </div>
         </section>
