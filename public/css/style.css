@@ -118,8 +118,6 @@ body {
     position: fixed;
     top: 0;
     left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
     z-index: 9999;
     color: #fff;
     font-size: 1.8rem;
@@ -127,9 +125,14 @@ body {
     text-align: center;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    padding: 1.6rem 15rem;
+    padding: 1.6rem 5rem;
     -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
 }
 .alert--success {
     background-color: #20bf6b;

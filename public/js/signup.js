@@ -1,27 +1,32 @@
 // const { default: axios } = require("axios");
 
-document.querySelector('.form-login').addEventListener('submit', (event) => {
+document.querySelector('.form-signup').addEventListener('submit', (event) => {
     event.preventDefault();
+    const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const passwordConfirm = document.getElementById('password-confirm').value;
 
-    login(email, password);
+    console.log(name, email, password, passwordConfirm);
+    signup(name, email, password, passwordConfirm);
 });
 
 // document.querySelector('.nav__el--logout').addEventListener('click', logout);
-const login = async (email, password) => {
+const signup = async (name, email, password, passwordConfirm) => {
     try {
         const axiosResponse = await axios({
             method: 'POST',
-            url: 'api/v1/users/login',
+            url: 'api/v1/users/signup',
             data: {
+                name: name,
                 email: email,
                 password: password,
+                passwordConfirm: passwordConfirm,
             },
         });
 
         if (axiosResponse.data.status === 'success') {
-            showAlert('success', 'Logged in Succesfully!');
+            showAlert('success', 'Account created Succesfully!');
             window.setTimeout(() => {
                 location.assign('/');
             }, 500);

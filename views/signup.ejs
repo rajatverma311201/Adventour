@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+
+        <title>Adventour | Sign Un</title>
+    </head>
+    <body>
+        <%- include('./partials/header') %>
+
+        <main class="main">
+            <div class="login-form">
+                <h2 class="heading-secondary ma-bt-lg">Create an Account</h2>
+                <form class="form form-signup" method="POST" action="/signup">
+                    <div class="form__group">
+                        <label class="form__label" for="name">Name</label
+                        ><input
+                            style="
+                                background-color: var(--color-dark-secondary);
+                            "
+                            class="form__input"
+                            id="name"
+                            type="text"
+                            placeholder="Example"
+                            required="required"
+                            name="name"
+                        />
+                    </div>
+                    <div class="form__group">
+                        <label class="form__label" for="email"
+                            >Email address</label
+                        ><input
+                            style="
+                                background-color: var(--color-dark-secondary);
+                            "
+                            class="form__input"
+                            id="email"
+                            type="email"
+                            placeholder="you@example.com"
+                            required="required"
+                            name="email"
+                        />
+                    </div>
+                    <div class="form__group ma-bt-md">
+                        <label class="form__label" for="password"
+                            >Password</label
+                        ><input
+                            style="
+                                background-color: var(--color-dark-secondary);
+                            "
+                            class="form__input"
+                            id="password"
+                            type="password"
+                            placeholder="••••••••"
+                            required="required"
+                            minlength="8"
+                            name="password"
+                        />
+                    </div>
+                    <div class="form__group ma-bt-md">
+                        <label class="form__label" for="password-confirm"
+                            >Confirm Password</label
+                        ><input
+                            style="
+                                background-color: var(--color-dark-secondary);
+                            "
+                            class="form__input"
+                            id="password-confirm"
+                            type="password"
+                            placeholder="••••••••"
+                            required="required"
+                            minlength="8"
+                            name="password-confirm"
+                        />
+                    </div>
+                    <div class="form__group">
+                        <!-- <input type="submit" value="Submit" /> -->
+                        <button class="btn btn--green">Signup</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <%- include('./partials/footer') %>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"
+            integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script src="/js/signup.js"></script>
+    </body>
+</html>

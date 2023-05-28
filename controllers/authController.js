@@ -38,6 +38,24 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
+    if (
+        !req.body.name ||
+        !req.body.email ||
+        !req.body.password ||
+        !req.body.passwordConfirm
+    ) {
+        return next(new AppError('Please provide all the fields', 400));
+    }
+
+    const userExist = await User.findOne({ email: req.body.email });
+    if (userExist) {
+        return next(new AppError('User already exists!', 400));
+    }
+
+    if (req.body.password !== req.body.passwordConfirm) {
+        return next(new AppError('Passwords do not match!', 400));
+    }
+
     const newUser = await User.create({
         name: req.body.name,
         email: req.body.email,

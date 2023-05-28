@@ -29,6 +29,9 @@ module.exports = {
     getLoginForm: (req, res) => {
         res.status(200).render('login.ejs');
     },
+    getSignupForm: (req, res) => {
+        res.status(200).render('signup.ejs');
+    },
     getMyAccountPage: async (req, res) => {
         res.status(200).render('account');
     },

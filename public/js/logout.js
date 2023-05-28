@@ -7,7 +7,7 @@ const showAlertLogout = (type, msg) => {
     hideAlertLogout();
     const markup = `<div class="alert alert--${type}">${msg}</div>`;
     document.querySelector('body').insertAdjacentHTML('afterbegin', markup);
-    window.setTimeout(hideAlertLogout, 1000);
+    window.setTimeout(hideAlertLogout, 1500);
 };
 
 const hideAlertLogout = () => {
