@@ -29,6 +29,24 @@ html {
     box-sizing: border-box;
 }
 
+@media (max-width: 48em) {
+    html {
+        font-size: 56.25%;
+    }
+}
+
+@media (max-width: 32.5em) {
+    html {
+        font-size: 50%;
+    }
+}
+
+@media (max-width: 22.5em) {
+    html {
+        font-size: 45%;
+    }
+}
+
 body {
     background-color: var(--color-dark);
     /* background-color: var(--color-dark); */
@@ -57,6 +75,11 @@ body {
     /* box-shadow: 5px 5px 10px 25px black; */
 }
 
+@media (max-width: 32.5em) {
+    .main {
+        padding: 8rem 2rem;
+    }
+}
 .flex {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -323,12 +346,14 @@ body {
     -ms-flex-align: center;
     align-items: center;
 }
-@media only screen and (max-width: 62.5em) {
+@media only screen and (max-width: 48em) {
     .header {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
+        height: auto;
+        padding: 1.75rem;
     }
 }
 .header__logo img {
@@ -859,6 +884,9 @@ body {
     text-decoration: none !important;
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    -o-transition: all 0.2s;
 }
 .footer__nav a:hover,
 .footer__nav a:active {
@@ -867,6 +895,7 @@ body {
 .footer__copyright {
     justify-self: end;
     color: #999;
+    text-align: center;
 }
 @media only screen and (max-width: 50em) {
     .footer__copyright {
@@ -874,6 +903,17 @@ body {
     }
 }
 
+@media (max-width: 30em) {
+    .footer {
+        padding: 5rem 2.5rem;
+    }
+    .footer__nav {
+        margin: 2.5rem auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        row-gap: 1.5rem;
+    }
+}
 .nav {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1092,17 +1132,19 @@ body {
 .card-container {
     max-width: 120rem;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 7rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5rem;
+    justify-content: center;
+
     padding: 2rem 0.5rem;
 }
 
 .card {
-    border-radius: 10px;
     box-shadow: 0 10px 50px 25px black;
-
-    /* border-radius: 3px; */
+    /*border-radius: 3px;
+    */
+    max-width: 32.5rem;
     overflow: hidden;
     -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
@@ -1118,6 +1160,11 @@ body {
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
 }
 .card__header {
     position: relative;
@@ -1255,6 +1302,13 @@ body {
     border-radius: 5px;
 }
 
+@media (max-width: 32.5em) {
+    .login-form {
+        padding: 3rem 4rem;
+        min-width: 30rem;
+    }
+}
+
 .form__input {
     display: block;
     font-family: inherit;
@@ -1347,6 +1401,12 @@ body {
     -webkit-transform: translateY(-2px);
     transform: translateY(-2px);
 }
+
+.github {
+    display: block;
+    margin: 1rem auto;
+}
+
 .github,
 .github:hover,
 .github:active,
