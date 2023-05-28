@@ -15,13 +15,27 @@
         <title>Adventour | <%= tour.name %></title>
 
         <script src="https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js"></script>
-        <script src="https://js.stripe.com/v3/" async></script>
+        <script src="https://js.stripe.com/v3/"></script>
 
         <link
             href="https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css"
             rel="stylesheet"
         />
+
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+            crossorigin=""
+        />
+        <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""
+        ></script>
+
         <script src="/js/index.js" type="module"></script>
+        <script src="/js/map.js" type="module"></script>
     </head>
     <body>
         <%- include("./partials/header") %>
@@ -173,7 +187,13 @@
                 />
             </div>
         </section>
-
+        <section class="section-map">
+            <div
+                id="map"
+                data-locations="<%= JSON.stringify(tour.locations) %>"
+                data-start-location="<%= JSON.stringify(tour.startLocation) %>"
+            ></div>
+        </section>
         <section class="section-reviews">
             <div class="reviews">
                 <% const reviews = tour.reviews %>
@@ -196,16 +216,19 @@
                         class=""
                     />
                 </div>
+                <!-- <% tour.images.forEach((image, idx)=>{ %> -->
                 <img
-                    src="/img/tour-5-2.jpg"
+                    src="/img/tours/<%= tour.images[0] %>"
                     alt=""
-                    class="cta__img cta__img--1"
+                    class="cta__img cta__img--<%= 1 %>"
                 />
                 <img
-                    src="/img/tour-5-1.jpg"
+                    src="/img/tours/<%= tour.images[1] %>"
                     alt=""
-                    class="cta__img cta__img--2"
+                    class="cta__img cta__img--<%= 2 %>"
                 />
+
+                <!-- <% }) %> -->
 
                 <div class="cta__content">
                     <h2 class="heading-secondary">What are you waiting for?</h2>

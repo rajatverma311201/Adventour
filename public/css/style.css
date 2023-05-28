@@ -344,7 +344,7 @@ body {
 }
 
 .section-header {
-    padding: 2rem 0.5rem;
+    padding: 2rem 0rem;
     position: relative;
     height: 38vw;
     clip-path: polygon(
@@ -565,6 +565,7 @@ body {
     top: 0;
     bottom: 0;
     width: 100%;
+    height: 100%;
 }
 
 .marker {
@@ -575,11 +576,11 @@ body {
     cursor: pointer;
 }
 
-.mapboxgl-popup {
+/* .mapboxg-popup {
     max-width: 25rem;
-}
+} */
 
-.mapboxgl-popup-content {
+.map-popup-content {
     text-align: center;
     font-family: 'Lato', sans-serif;
     padding: 1.5rem !important;
@@ -811,7 +812,6 @@ body {
 }
 
 .footer {
-
     -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.5);
     box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.5);
     background-color: var(--color-dark);
