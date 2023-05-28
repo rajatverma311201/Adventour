@@ -5,8 +5,15 @@ const catchAsync = require('./../utils/catchAsync');
 // const axios = require('axios');
 module.exports = {
     overview: async function (req, res) {
-        const tours = await Tour.find();
-
+        const search = req.query.search;
+        // console.log(search);
+        let tours = [];
+        if (search) {
+            const regex = new RegExp(`${search}`, 'gi');
+            tours = await Tour.find({ name: { $regex: regex } });
+        } else {
+            tours = await Tour.find();
+        }
         res.render('overview.ejs', {
             title: 'Overview',
             tours,
@@ -21,7 +28,7 @@ module.exports = {
             }
         );
 
-        console.log(currTour);
+        // console.log(currTour);
 
         res.render('tour.ejs', { tour: currTour });
         // res.status(200).send(currTour);
@@ -58,7 +65,7 @@ module.exports = {
 
         const tourIDs = bookings.map((el) => el.tour.id);
         const tours = await Tour.find({ _id: { $in: tourIDs } });
-        console.log(tours);
+        // console.log(tours);
         res.status(200).render('overview', {
             title: 'My Tours',
             tours,
