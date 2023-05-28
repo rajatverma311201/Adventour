@@ -1144,7 +1144,7 @@ body {
     box-shadow: 0 10px 50px 25px black;
     /*border-radius: 3px;
     */
-    max-width: 32.5rem;
+    width: 32.5rem;
     overflow: hidden;
     -webkit-box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
@@ -1165,6 +1165,14 @@ body {
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
+    -moz-transition: 0.3s all;
+    -ms-transition: 0.3s all;
+    -o-transition: 0.3s all;
+}
+@media (max-width: 48em) {
+    .card {
+        width: 35rem;
+    }
 }
 .card__header {
     position: relative;
