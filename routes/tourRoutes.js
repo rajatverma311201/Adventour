@@ -53,4 +53,7 @@ router
         tourController.deleteTour
     );
 
+router.route('/:tourId/bookings').get(tourController.getTourBookings);
+router.route('/:tourId/reviews').get(tourController.getTourReviews);
+
 module.exports = router;

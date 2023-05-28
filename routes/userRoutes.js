@@ -31,4 +31,7 @@ router
     .patch(userController.updateUser)
     .delete(userController.deleteUser);
 
+router.route('/:userId/bookings').get(userController.getUserBookings);
+router.route('/:userId/reviews').get(userController.getUserReviews);
+
 module.exports = router;
