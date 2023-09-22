@@ -38,12 +38,7 @@ const createSendToken = (user, statusCode, res) => {
 };
 
 exports.signup = catchAsync(async (req, res, next) => {
-    if (
-        !req.body.name ||
-        !req.body.email ||
-        !req.body.password ||
-        !req.body.passwordConfirm
-    ) {
+    if (!req.body.name || !req.body.email || !req.body.password) {
         return next(new AppError('Please provide all the fields', 400));
     }
 
@@ -60,11 +55,10 @@ exports.signup = catchAsync(async (req, res, next) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
-        passwordConfirm: req.body.passwordConfirm,
     });
 
-    const url = `${req.protocol}://${req.get('host')}/me`;
-    await new Email(newUser, url).sendWelcome();
+    // const url = `${req.protocol}://${req.get('host')}/me`;
+    // await new Email(newUser, url).sendWelcome();
 
     createSendToken(newUser, 201, res);
 });

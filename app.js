@@ -15,6 +15,21 @@ const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const globalErrorHandler = require('./controllers/errorController');
 
+const swaggerUi = require('swagger-ui-express');
+
+const swaggerDocument = require('./swagger.json');
+
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Hello World',
+            version: '1.0.0',
+        },
+    },
+    apis: ['./routes/*.js'], // files containing annotations as above
+};
+
 const app = express();
 
 // Development logging
@@ -58,7 +73,7 @@ app.use(
             'difficulty',
             'price',
         ],
-    })
+    }),
 );
 
 app.set('view engine', 'ejs');
@@ -77,6 +92,8 @@ app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/bookings', bookingRouter);
+
+app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', viewRouter);
 
 app.all('*', (req, res, next) => {

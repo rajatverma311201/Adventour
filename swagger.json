@@ -1,0 +1,332 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Natours API",
+        "description": "The Natours API contains endpoints for Tours, Users, and Reviews.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/v1/tours": {
+            "get": {
+                "summary": "Get All Tours",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "tags": ["Tours"]
+            },
+            "post": {
+                "summary": "Create New Tour",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tour"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                },
+                "tags": ["Tours"]
+            }
+        },
+        "/api/v1/tours/{tourId}": {
+            "get": {
+                "summary": "Get Tour by ID",
+                "parameters": [
+                    {
+                        "name": "tourId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "tags": ["Tours"]
+            },
+            "patch": {
+                "summary": "Update Tour by ID",
+                "parameters": [
+                    {
+                        "name": "tourId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tour"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "tags": ["Tours"]
+            },
+            "delete": {
+                "summary": "Delete Tour by ID",
+                "parameters": [
+                    {
+                        "name": "tourId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "tags": ["Tours"]
+            }
+        },
+        "/api/v1/reviews": {
+            "get": {
+                "summary": "Get All Reviews",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "tags": ["Reviews"]
+            },
+            "post": {
+                "summary": "Create New Review",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Review"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                },
+                "tags": ["Reviews"]
+            }
+        },
+        "/api/v1/reviews/{reviewId}": {
+            "get": {
+                "summary": "Get Review by ID",
+                "parameters": [
+                    {
+                        "name": "reviewId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "tags": ["Reviews"]
+            },
+            "patch": {
+                "summary": "Update Review by ID",
+                "parameters": [
+                    {
+                        "name": "reviewId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Review"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "tags": ["Reviews"]
+            },
+            "delete": {
+                "summary": "Delete Review by ID",
+                "parameters": [
+                    {
+                        "name": "reviewId",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "tags": ["Reviews"]
+            }
+        },
+        "/api/v1/users/login": {
+            "post": {
+                "summary": "Login User",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "required": true,
+                                        "format": "email",
+                                        "pattern": "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                },
+                "tags": ["Users"]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Tour": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "required": true,
+                        "maxLength": 40,
+                        "minLength": 10,
+                        "unique": true
+                    },
+                    "slug": {
+                        "type": "string"
+                    },
+                    "duration": {
+                        "type": "number",
+                        "required": true
+                    },
+                    "maxGroupSize": {
+                        "type": "number",
+                        "required": true
+                    },
+                    "difficulty": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "ratingsAverage": {
+                        "type": "number",
+                        "default": 4.5
+                    },
+                    "ratingsQuantity": {
+                        "type": "number",
+                        "default": 0
+                    },
+                    "price": {
+                        "type": "number",
+                        "required": true
+                    },
+
+                    "priceDiscount": {
+                        "type": "number"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "imageCover": {
+                        "type": "string",
+                        "required": true
+                    },
+                    "images": ["string"],
+                    "createdAt": {
+                        "type": "Date"
+                    },
+                    "startDates": ["Date"],
+                    "secretTour": {
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "startLocation": {
+                        "type": {
+                            "type": "string",
+                            "default": "Point"
+                        },
+                        "coordinates": "number",
+                        "address": "string",
+                        "description": "string"
+                    },
+                    "locations": {
+                        "type": "array"
+                    },
+                    "guides": [
+                        {
+                            "type": "mongoose.Schema.ObjectId",
+                            "$ref": "#/components/schemas/User"
+                        }
+                    ]
+                }
+            }
+        },
+        "Review": {
+            "type": "object",
+            "properties": {
+                "rating": {
+                    "type": "integer"
+                },
+                "comment": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
