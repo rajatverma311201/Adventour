@@ -40,7 +40,6 @@
 
 ```javascript
 const rateLimit = require('express-rate-limit');
-// const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
@@ -48,6 +47,8 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 ```
+
+<!--  const helmet = require('helmet'); -->
 
 > -   Rate Limit is the module used for limiting the no. of requests made by a client to the server.
 > -   Mongo Sanitize sanitizes mongodb queries against NOSQL query injections.
