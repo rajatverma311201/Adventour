@@ -17,7 +17,8 @@ const createSendToken = (user, statusCode, res) => {
     const token = signToken(user._id);
     const cookieOptions = {
         expires: new Date(
-            Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+            Date.now() +
+                process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
         ),
         httpOnly: true,
     };
@@ -55,6 +56,7 @@ exports.signup = catchAsync(async (req, res, next) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
+        passwordConfirm: req.body.passwordConfirm,
     });
 
     // const url = `${req.protocol}://${req.get('host')}/me`;
@@ -88,7 +90,7 @@ exports.isLoggedIn = async (req, res, next) => {
             // 1) verify token
             const decoded = await promisify(jwt.verify)(
                 req.cookies.jwt,
-                process.env.JWT_SECRET
+                process.env.JWT_SECRET,
             );
 
             // 2) Check if user still exists
@@ -143,8 +145,8 @@ exports.protect = catchAsync(async (req, res, next) => {
         return next(
             new AppError(
                 'You are not logged in! Please log in to get access.',
-                401
-            )
+                401,
+            ),
         );
     }
 
@@ -157,8 +159,8 @@ exports.protect = catchAsync(async (req, res, next) => {
         return next(
             new AppError(
                 'The user belonging to this token does no longer exist.',
-                401
-            )
+                401,
+            ),
         );
     }
 
@@ -167,8 +169,8 @@ exports.protect = catchAsync(async (req, res, next) => {
         return next(
             new AppError(
                 'User recently changed password! Please log in again.',
-                401
-            )
+                401,
+            ),
         );
     }
 
@@ -185,8 +187,8 @@ exports.restrictTo = (...roles) => {
             return next(
                 new AppError(
                     'You do not have permission to perform this action',
-                    403
-                )
+                    403,
+                ),
             );
         }
 
@@ -207,7 +209,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     // 3) Send it to user's email
     const resetURL = `${req.protocol}://${req.get(
-        'host'
+        'host',
     )}/api/v1/users/resetPassword/${resetToken}`;
 
     const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
@@ -232,9 +234,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
         return next(
             new AppError(
-                'There was an error sending the email. Try again later!'
+                'There was an error sending the email. Try again later!',
             ),
-            500
+            500,
         );
     }
 });
