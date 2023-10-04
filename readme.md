@@ -1,4 +1,4 @@
-# Adventour website
+# Adventour - A Server Side Rendered Tour Booking Website
 
 ### [👉🏻 Click to see Live Demo 👈🏻](https://adventour.onrender.com/)
 
@@ -56,3 +56,20 @@ const bcrypt = require('bcryptjs');
 > -   Crypto module used for generating hash token for reset password functionality of the user.
 > -   JWT is used for stateless authentication mechanisms for users and providers.
 > -   Bcrypt to hash user password and then store them in the database instead of plain password for security purposes.
+
+## Screenshots
+
+-   #### Home Page
+
+    <img src="./public/images/home.png" height="750px"  />
+
+-   #### Profile Settings Page
+
+    <img src="./public/images/profile.png" height="750px"  />
+
+-   #### Login Page
+
+    <img src="./public/images/login.png"  />
+
+-   #### Signup Page
+    <img src="./public/images/signup.png" />
