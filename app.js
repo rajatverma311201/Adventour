@@ -40,9 +40,9 @@ const origin =
 app.use(
     cors({
         origin,
-        preflightContinue: true,
-        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-        credentials: true,
+        // preflightContinue: true,
+        // methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+        // credentials: true,
     }),
 );
 
