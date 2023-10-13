@@ -35,7 +35,7 @@ const app = express();
 const origin =
     process.env.NODE_ENV === 'development'
         ? 'http://localhost:5173'
-        : 'https://www.adventour-react.vercel.app';
+        : 'https://adventour-react.vercel.app';
 
 app.use(
     cors({
