@@ -5,8 +5,8 @@ const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
-const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 const AppError = require('./utils/appError');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -31,6 +31,18 @@ const options = {
 };
 
 const app = express();
+
+const origin =
+    process.env.NODE_ENV === 'development'
+        ? 'http://localhost:5173'
+        : 'https://www.adventour-react.vercel.app';
+
+app.use(
+    cors({
+        origin,
+        credentials: true,
+    }),
+);
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
