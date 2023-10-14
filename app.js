@@ -32,24 +32,34 @@ const options = {
 
 const app = express();
 
-const origin =
-    process.env.NODE_ENV === 'development'
-        ? 'http://localhost:5173'
-        : 'https://adventour-react.vercel.app';
+// const allowedOrigins =
+//     process.env.NODE_ENV === 'development'
+//         ? 'http://localhost:5173'
+//         : 'https://adventour-react.vercel.app';
 
-app.use(
-    cors({
-        origin,
-        // preflightContinue: true,
-        // methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-        credentials: true,
-    }),
-);
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://adventour-react.vercel.app',
+    'https://www.adventour-react.vercel.app',
+];
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 // Development logging
-if (process.env.NODE_ENV === 'development') {
-    app.use(morgan('dev'));
-}
+// if (process.env.NODE_ENV === 'development') {
+app.use(morgan('dev'));
+// }
 
 // Limit requests from same API
 const limiter = rateLimit({
