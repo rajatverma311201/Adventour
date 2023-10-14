@@ -42,7 +42,7 @@ app.use(
         origin,
         // preflightContinue: true,
         // methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-        // credentials: true,
+        credentials: true,
     }),
 );
 

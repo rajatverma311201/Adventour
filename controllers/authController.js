@@ -7,19 +7,22 @@ const AppError = require('./../utils/appError');
 const sendEmail = require('./../utils/email');
 const Email = require('./../utils/email');
 
-const signToken = (id) => {
+const signToken = (id, expiry) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_EXPIRES_IN,
     });
 };
 
 const createSendToken = (user, statusCode, res) => {
-    const token = signToken(user._id);
+    const expiry = process.env.JWT_EXPIRES_IN;
+
+    const cookieExpiry = new Date(
+        Date.now() + parseInt(process.env.JWT_EXPIRES_IN) * 24 * 60 * 60 * 1000,
+    );
+
+    const token = signToken(user._id, expiry);
     const cookieOptions = {
-        expires: new Date(
-            Date.now() +
-                process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000,
-        ),
+        expires: cookieExpiry,
         httpOnly: true,
     };
     if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
@@ -31,10 +34,7 @@ const createSendToken = (user, statusCode, res) => {
 
     res.status(statusCode).json({
         status: 'success',
-        token,
-        data: {
-            user,
-        },
+        data: { user, token, expiresIn: cookieExpiry },
     });
 };
 
@@ -106,6 +106,7 @@ exports.isLoggedIn = async (req, res, next) => {
 
             // THERE IS A LOGGED IN USER
             res.locals.user = currentUser;
+            req.user = currentUser;
             return next();
         } catch (err) {
             return next();
@@ -114,6 +115,15 @@ exports.isLoggedIn = async (req, res, next) => {
     next();
 };
 exports.logout = async (req, res, next) => {
+    const cookieExpiry = new Date(
+        Date.now() + parseInt(process.env.JWT_EXPIRES_IN) * 24 * 60 * 60 * 1000,
+    );
+    const cookieOptions = {
+        expires: cookieExpiry,
+        httpOnly: true,
+    };
+    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
     try {
         res.cookie('jwt', 'loggedOut', {
             expires: new Date(Date.now() + 10000),

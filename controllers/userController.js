@@ -12,12 +12,22 @@ const filterObj = (obj, ...allowedFields) => {
     });
     return newObj;
 };
+
 exports.getUser = factory.getOne(User);
 exports.getAllUsers = factory.getAll(User);
 
 // Do NOT update passwords with this!
 exports.updateUser = factory.updateOne(User);
 exports.deleteUser = factory.deleteOne(User);
+
+exports.getCurrentUser = catchAsync(async (req, res, next) => {
+    const id = req.user?.id;
+    let user = await User.findById(id);
+    res.status(200).json({
+        status: 'success',
+        data: user,
+    });
+});
 
 exports.getMe = (req, res, next) => {
     req.params.id = req.user.id;
@@ -30,8 +40,8 @@ exports.updateMe = catchAsync(async (req, res, next) => {
         return next(
             new AppError(
                 'This route is not for password updates. Please use /updateMyPassword.',
-                400
-            )
+                400,
+            ),
         );
     }
 
@@ -45,7 +55,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
         {
             new: true,
             runValidators: true,
-        }
+        },
     );
 
     res.status(200).json({
