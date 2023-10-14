@@ -22,6 +22,7 @@ exports.deleteUser = factory.deleteOne(User);
 
 exports.getCurrentUser = catchAsync(async (req, res, next) => {
     const id = req.user?.id;
+    console.log({ user_id: id });
     let user = await User.findById(id);
     res.status(200).json({
         status: 'success',

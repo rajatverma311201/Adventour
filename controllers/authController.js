@@ -23,7 +23,7 @@ const createSendToken = (user, statusCode, res) => {
     const token = signToken(user._id, expiry);
     const cookieOptions = {
         expires: cookieExpiry,
-        httpOnly: true,
+        // httpOnly: true,
     };
     // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
@@ -109,6 +109,7 @@ exports.isLoggedIn = async (req, res, next) => {
             req.user = currentUser;
             return next();
         } catch (err) {
+            console.log(err);
             return next();
         }
     }
@@ -120,14 +121,14 @@ exports.logout = async (req, res, next) => {
     );
     const cookieOptions = {
         expires: cookieExpiry,
-        httpOnly: true,
+        // httpOnly: true,
     };
     if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
     try {
         res.cookie('jwt', 'loggedOut', {
             expires: new Date(Date.now() + 10000),
-            httpOnly: true,
+            // httpOnly: true,
         });
         res.status(200).json({
             status: 'success',
