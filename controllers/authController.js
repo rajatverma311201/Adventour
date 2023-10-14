@@ -23,6 +23,7 @@ const createSendToken = (user, statusCode, res) => {
     const token = signToken(user._id, expiry);
     const cookieOptions = {
         expires: cookieExpiry,
+        domain: 'https://adventour-react.vercel.app',
         // httpOnly: true,
     };
     // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
@@ -129,6 +130,7 @@ exports.logout = async (req, res, next) => {
         res.cookie('jwt', 'loggedOut', {
             expires: new Date(Date.now() + 10000),
             // httpOnly: true,
+            domain: 'https://adventour-react.vercel.app',
         });
         res.status(200).json({
             status: 'success',
