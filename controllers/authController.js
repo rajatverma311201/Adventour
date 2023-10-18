@@ -15,18 +15,18 @@ const signToken = (id, expiry) => {
 
 const createSendToken = (user, statusCode, res) => {
     const expiry = process.env.JWT_EXPIRES_IN;
+    const jwtTokenExpiry =
+        Date.now() + parseInt(process.env.JWT_EXPIRES_IN) * 24 * 60 * 60 * 1000;
 
-    const cookieExpiry = new Date(
-        Date.now() + parseInt(process.env.JWT_EXPIRES_IN) * 24 * 60 * 60 * 1000,
-    );
+    const cookieExpiry = new Date(jwtTokenExpiry);
 
     const token = signToken(user._id, expiry);
     const cookieOptions = {
         expires: cookieExpiry,
-        domain: 'https://adventour-react.vercel.app',
-        // httpOnly: true,
+        httpOnly: true,
     };
-    // if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+    if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
     res.cookie('jwt', token, cookieOptions);
 
@@ -35,7 +35,7 @@ const createSendToken = (user, statusCode, res) => {
 
     res.status(statusCode).json({
         status: 'success',
-        data: { user, token, expiresIn: cookieExpiry },
+        data: { user, jwtToken: token, jwtTokenExpiry: jwtTokenExpiry },
     });
 };
 
@@ -86,11 +86,21 @@ exports.login = catchAsync(async (req, res, next) => {
 
 // Only for rendered pages, no errors!
 exports.isLoggedIn = async (req, res, next) => {
-    if (req.cookies.jwt) {
+    let token;
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith('Bearer')
+    ) {
+        token = req.headers.authorization.split(' ')[1];
+    } else if (req.cookies.jwt) {
+        token = req.cookies.jwt;
+    }
+
+    if (token) {
         try {
             // 1) verify token
             const decoded = await promisify(jwt.verify)(
-                req.cookies.jwt,
+                token,
                 process.env.JWT_SECRET,
             );
 
@@ -122,15 +132,14 @@ exports.logout = async (req, res, next) => {
     );
     const cookieOptions = {
         expires: cookieExpiry,
-        // httpOnly: true,
+        httpOnly: true,
     };
     if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
 
     try {
         res.cookie('jwt', 'loggedOut', {
             expires: new Date(Date.now() + 10000),
-            // httpOnly: true,
-            domain: 'https://adventour-react.vercel.app',
+            httpOnly: true,
         });
         res.status(200).json({
             status: 'success',
