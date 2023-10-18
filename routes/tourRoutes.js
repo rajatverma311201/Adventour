@@ -7,6 +7,8 @@ const router = express.Router();
 
 // router.param('id', tourController.checkID);
 
+router.get('/slug/:slug', tourController.getTourBySlug);
+
 router.use('/:tourId/reviews', reviewRouter);
 
 router
@@ -19,7 +21,7 @@ router
     .get(
         authController.protect,
         authController.restrictTo('admin', 'lead-guide', 'guide'),
-        tourController.getMonthlyPlan
+        tourController.getMonthlyPlan,
     );
 
 router
@@ -36,7 +38,7 @@ router
     .post(
         authController.protect,
         authController.restrictTo('admin', 'lead-guide'),
-        tourController.createTour
+        tourController.createTour,
     );
 
 router
@@ -45,12 +47,12 @@ router
     .patch(
         authController.protect,
         authController.restrictTo('admin', 'lead-guide'),
-        tourController.updateTour
+        tourController.updateTour,
     )
     .delete(
         authController.protect,
         authController.restrictTo('admin', 'lead-guide'),
-        tourController.deleteTour
+        tourController.deleteTour,
     );
 
 router.route('/:tourId/bookings').get(tourController.getTourBookings);
