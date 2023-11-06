@@ -27,6 +27,7 @@ const createSendToken = (user, statusCode, res) => {
         httpOnly: true,
         sameSite: false,
         secure: true,
+        maxAge: parseInt(process.env.JWT_EXPIRES_IN) * 24 * 60 * 60 * 1000,
     };
 
     if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
@@ -141,10 +142,11 @@ exports.logout = async (req, res, next) => {
 
     try {
         res.cookie('jwt', 'loggedOut', {
-            expires: new Date(Date.now() + 10000),
+            // expires: new Date(Date.now() + 10000),
             httpOnly: true,
             sameSite: false,
             secure: true,
+            maxAge: parseInt(process.env.JWT_EXPIRES_IN) * 24 * 60 * 60 * 1000,
         });
         res.status(200).json({
             status: 'success',
@@ -159,6 +161,9 @@ exports.logout = async (req, res, next) => {
 exports.protect = catchAsync(async (req, res, next) => {
     // 1) Getting token and check of it's there
     let token;
+
+    console.log(req.headers);
+
     if (
         req.headers.authorization &&
         req.headers.authorization.startsWith('Bearer')
