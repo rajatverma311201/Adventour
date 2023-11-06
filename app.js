@@ -69,11 +69,11 @@ const corsOptions = {
 // app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
-    res.header(
+    res.setHeader(
         'Access-Control-Allow-Origin',
         'https://adventour-react.vercel.app',
     );
-    res.header('Access-Control-Allow-Credentials', true);
+    res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
 
