@@ -44,11 +44,11 @@ const options = {
 
 const app = express();
 
-const allowedOrigins =
-    process.env.NODE_ENV === 'development'
-        ? 'http://localhost:5173'
-        : 'https://adventour-react.vercel.app';
-/*
+// const allowedOrigins =
+//     process.env.NODE_ENV === 'development'
+//         ? 'http://localhost:5173'
+//         : 'https://adventour-react.vercel.app';
+
 const allowedOrigins = [
     'http://localhost:5173',
     'https://adventour-react.vercel.app',
@@ -63,30 +63,9 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));
         }
     },
-    credentials: true,
 };
-*/
 
-// app.use(cors(corsOptions));
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', allowedOrigins);
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader(
-        'Access-Control-Allow-Methods',
-        'GET, POST, PUT, PATCH, DELETE',
-    );
-    res.setHeader(
-        'Access-Control-Allow-Headers',
-        'Content-Type, Authorization',
-    );
-    res.setHeader(
-        'Access-Control-Expose-Headers',
-        'Content-Type, Authorization',
-    );
-
-    next();
-});
+app.use(cors(corsOptions));
 
 // Development logging
 // if (process.env.NODE_ENV === 'development') {
