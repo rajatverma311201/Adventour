@@ -6,6 +6,7 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const sendEmail = require('./../utils/email');
 const Email = require('./../utils/email');
+const { verifyIdToken } = require('../services/authService');
 
 const signToken = (id, expiry) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -305,8 +306,32 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     user.password = req.body.password;
     user.passwordConfirm = req.body.passwordConfirm;
     await user.save();
-    // User.findByIdAndUpdate will NOT work as intended!
 
     // 4) Log user in, send JWT
     createSendToken(user, 200, res);
+});
+
+exports.providerAuth = catchAsync(async (req, res, next) => {
+    const { token } = req.body;
+    const decoded = await verifyIdToken(token);
+    if (!decoded) {
+        return next(new AppError('Invalid ID token', 400));
+    }
+
+    console.log(decoded);
+
+    const { email, name, picture } = decoded;
+
+    const dbUser = await User.findOne({ email });
+    let userId = dbUser?._id;
+    if (!dbUser) {
+        const newUser = await User.create({
+            name,
+            email,
+            photo: picture,
+        });
+        userId = newUser._id;
+    }
+
+    createSendToken({ _id: userId }, 200, res);
 });

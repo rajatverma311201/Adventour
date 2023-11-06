@@ -23,13 +23,13 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, 'Please provide a password'],
+        // required: [true, 'Please provide a password'],
         minlength: 8,
         select: false,
     },
     passwordConfirm: {
         type: String,
-        required: [true, 'Please confirm your password'],
+        // required: [true, 'Please confirm your password'],
         validate: {
             // This only works on CREATE and SAVE!!!
             validator: function (el) {
@@ -75,7 +75,7 @@ userSchema.pre(/^find/, function (next) {
 
 userSchema.methods.correctPassword = async function (
     candidatePassword,
-    userPassword
+    userPassword,
 ) {
     return await bcrypt.compare(candidatePassword, userPassword);
 };
@@ -84,7 +84,7 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
     if (this.passwordChangedAt) {
         const changedTimestamp = parseInt(
             this.passwordChangedAt.getTime() / 1000,
-            10
+            10,
         );
 
         return JWTTimestamp < changedTimestamp;
