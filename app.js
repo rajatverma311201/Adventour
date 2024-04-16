@@ -50,7 +50,9 @@ const app = express();
 //         : 'https://adventour-react.vercel.app';
 
 const allowedOrigins = [
+    'http://localhost:8000',
     'http://localhost:5173',
+    'https://adventour.onrender.com/',
     'https://adventour-react.vercel.app',
     'https://www.adventour-react.vercel.app',
 ];
@@ -108,7 +110,7 @@ app.use(
             'difficulty',
             'price',
         ],
-    }),
+    })
 );
 
 app.set('view engine', 'ejs');
